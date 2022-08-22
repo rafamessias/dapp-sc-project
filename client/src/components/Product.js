@@ -1,4 +1,12 @@
-import { Button, Grid, Paper, TextField, Typography } from "@mui/material";
+import {
+  Button,
+  Card,
+  CardContent,
+  Grid,
+  Paper,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { useState } from "react";
 import { useEth } from "../contexts/EthContext";
 
@@ -38,40 +46,42 @@ export default function Product() {
   };
 
   return (
-    <Paper elevation={2} sx={{ py: 2, px: 4 }}>
-      <Typography variant="h4" sx={{ color: "white" }}>
-        Product Details
-      </Typography>
-      <Grid container spacing={2} sx={{ mt: 1 }}>
-        <Grid item xs={12}>
-          <TextField
-            fullWidth
-            label="Star Name"
-            value={starName}
-            onChange={(e) => setStarName(e.target.value)}
-          />
+    <Card>
+      <CardContent>
+        <Typography variant="h5" sx={{ color: "white" }}>
+          Product Details
+        </Typography>
+        <Grid container spacing={4} sx={{ mt: 1 }}>
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              label="Star Name"
+              value={starName}
+              onChange={(e) => setStarName(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              label="Star Id"
+              value={starId}
+              type="number"
+              onChange={(e) => setStarId(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Button
+              variant="contained"
+              onClick={() => createStar(starName, starId)}>
+              Create
+            </Button>
+            <Button sx={{ ml: 2 }} onClick={() => resetForm()}>
+              Reset
+            </Button>
+          </Grid>
+          <Grid item sx={{ mt: 2, minHeight: "45px" }}></Grid>
         </Grid>
-        <Grid item xs={12}>
-          <TextField
-            fullWidth
-            label="Star Id"
-            value={starId}
-            type="number"
-            onChange={(e) => setStarId(e.target.value)}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <Button
-            variant="contained"
-            onClick={() => createStar(starName, starId)}>
-            Create
-          </Button>
-          <Button sx={{ ml: 2 }} onClick={() => resetForm()}>
-            Reset
-          </Button>
-        </Grid>
-        <Grid item sx={{ mt: 2, minHeight: "45px" }}></Grid>
-      </Grid>
-    </Paper>
+      </CardContent>
+    </Card>
   );
 }

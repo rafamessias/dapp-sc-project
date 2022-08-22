@@ -39,8 +39,8 @@ export default function Header() {
             justifyContent: "space-between",
             alignItems: "center",
           }}>
-          <Typography variant="h3" component="div">
-            New Daap
+          <Typography variant="h5" component="div">
+            Supply Chain Dapp
           </Typography>
           {account ? (
             <Button variant="outlined" size="small">
