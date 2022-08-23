@@ -1,7 +1,9 @@
 import { Box, Tab, Tabs } from "@mui/material";
 import { useState } from "react";
 import Farm from "./Farm";
+import History from "./History";
 import Product from "./Product";
+import Transactions from "./Transactions";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -45,7 +47,7 @@ export default function DappApp() {
             <Tabs value={value} onChange={handleChange} centered>
               <Tab label="Product" {...a11yProps(0)} />
               <Tab label="Farm" {...a11yProps(1)} />
-              <Tab label="Detail" {...a11yProps(2)} />
+              <Tab label="Transactions" {...a11yProps(2)} />
               <Tab label="History" {...a11yProps(3)} />
             </Tabs>
           </Box>
@@ -56,10 +58,10 @@ export default function DappApp() {
             <Farm />
           </TabPanel>
           <TabPanel value={value} index={2}>
-            Product Details
+            <Transactions />
           </TabPanel>
           <TabPanel value={value} index={3}>
-            Transaction History
+            <History />
           </TabPanel>
         </Box>
       </Box>
