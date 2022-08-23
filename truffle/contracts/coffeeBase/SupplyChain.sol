@@ -63,14 +63,14 @@ contract SupplyChain is
     }
 
     // Define 8 events with the same 8 state values and accept 'upc' as input argument
-    event Harvested(uint256 upc);
-    event Processed(uint256 upc);
-    event Packed(uint256 upc);
-    event ForSale(uint256 upc);
-    event Sold(uint256 upc);
-    event Shipped(uint256 upc);
-    event Received(uint256 upc);
-    event Purchased(uint256 upc);
+    event Harvested(uint256 indexed upc);
+    event Processed(uint256 indexed upc);
+    event Packed(uint256 indexed upc);
+    event ForSale(uint256 indexed upc);
+    event Sold(uint256 indexed upc);
+    event Shipped(uint256 indexed upc);
+    event Received(uint256 indexed upc);
+    event Purchased(uint256 indexed upc);
 
     // Define a modifer that checks to see if msg.sender == owner of the contract
     modifier onlyOwner() virtual {
@@ -196,6 +196,8 @@ contract SupplyChain is
         string memory _originFarmLongitude,
         string memory _productNotes
     ) public onlyFarmer {
+        require(items[_upc].sku == 0, "Item sku need to be 0");
+
         // Add the new item as part of Harvest
         items[_upc].sku = sku;
         items[_upc].upc = upc;
