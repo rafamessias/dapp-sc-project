@@ -3,30 +3,31 @@ import {
   Card,
   CardContent,
   Grid,
-  Paper,
   TextField,
   Typography,
 } from "@mui/material";
 import { useState } from "react";
 import { useEth } from "../contexts/EthContext";
+import ReturnMsg from "./utils/ReturnMsg";
 
 export default function Product() {
-  const [starName, setStarName] = useState("");
-  const [starId, setStarId] = useState(0);
+  const [sku, setSku] = useState(0);
   const [trxResult, setTrxResult] = useState("");
   const [trxError, setTrxError] = useState("");
 
   //get contract and accounts to perform the transactions
   const {
     connectWallet,
-    state: { contract, accounts, web3 },
+    state: { contract },
   } = useEth();
 
-  const account = !accounts ? "" : accounts[0];
+  const resetForm = () => {
+    setSku("");
+    setTrxResult("");
+    setTrxError("");
+  };
 
-  const resetForm = () => {};
-
-  const createStar = async (_starName, _starId) => {
+  const fetchData1 = async (_sku) => {
     //if wallet not connected, go and request the connection
     if (!contract) {
       connectWallet();
@@ -34,12 +35,29 @@ export default function Product() {
     }
 
     try {
-      const starIdEnc = web3.utils.toBN(_starId);
       const transaction = await contract.methods
-        .createStar(_starName, starIdEnc.toString())
-        .send({ from: account });
+        .fetchItemBufferOne(_sku)
+        .call();
 
-      setTrxResult(transaction.transactionHash);
+      setTrxResult(transaction);
+    } catch (error) {
+      setTrxError(error.message);
+    }
+  };
+
+  const fetchData2 = async (_sku) => {
+    //if wallet not connected, go and request the connection
+    if (!contract) {
+      connectWallet();
+      return;
+    }
+
+    try {
+      const transaction = await contract.methods
+        .fetchItemBufferTwo(_sku)
+        .call();
+
+      setTrxResult(transaction);
     } catch (error) {
       setTrxError(error.message);
     }
@@ -55,31 +73,36 @@ export default function Product() {
           <Grid item xs={12}>
             <TextField
               fullWidth
-              label="Star Name"
-              value={starName}
-              onChange={(e) => setStarName(e.target.value)}
+              label="SKU"
+              value={sku}
+              onChange={(e) => setSku(e.target.value)}
             />
           </Grid>
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              label="Star Id"
-              value={starId}
-              type="number"
-              onChange={(e) => setStarId(e.target.value)}
-            />
-          </Grid>
+
           <Grid item xs={12}>
             <Button
               variant="contained"
-              onClick={() => createStar(starName, starId)}>
-              Create
+              sx={{ mr: 2, mb: 2 }}
+              onClick={() => fetchData1(sku)}>
+              Fetch Data 1
             </Button>
-            <Button sx={{ ml: 2 }} onClick={() => resetForm()}>
+            <Button
+              variant="contained"
+              sx={{ mr: 2, mb: 2 }}
+              onClick={() => fetchData2(sku)}>
+              Fetch Data 2
+            </Button>
+            <Button sx={{ ml: 2, mb: 2 }} onClick={() => resetForm()}>
               Reset
             </Button>
           </Grid>
-          <Grid item sx={{ mt: 2, minHeight: "45px" }}></Grid>
+          <Grid item sx={{ mt: 2, minHeight: "45px" }}>
+            <ReturnMsg
+              trxError={trxError}
+              trxResult={trxResult}
+              funcType="call"
+            />
+          </Grid>
         </Grid>
       </CardContent>
     </Card>

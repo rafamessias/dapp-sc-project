@@ -1,9 +1,11 @@
-export default {
+const Paper = {
   MuiPaper: {
     styleOverrides: {
       root: {
-        backgroundImage: 'none'
-      }
-    }
-  }
-}
+        backgroundImage: "none",
+      },
+    },
+  },
+};
+
+export default Paper;

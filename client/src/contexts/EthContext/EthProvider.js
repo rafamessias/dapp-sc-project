@@ -29,7 +29,7 @@ function EthProvider({ children }) {
 
   const connectWallet = useCallback(() => {
     try {
-      const artifact = {}; //require("../../contracts/file.json");
+      const artifact = require("../../contracts/Ownable.json");
       init(artifact);
     } catch (error) {
       console.error(error);

@@ -1,5 +1,6 @@
-import { Box, Tab, Tabs, Typography } from "@mui/material";
+import { Box, Tab, Tabs } from "@mui/material";
 import { useState } from "react";
+import Farm from "./Farm";
 import Product from "./Product";
 
 function TabPanel(props) {
@@ -12,11 +13,7 @@ function TabPanel(props) {
       id={`tabpanel-${index}`}
       aria-labelledby={`tab-${index}`}
       {...other}>
-      {value === index && (
-        <Box sx={{ py: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
+      {value === index && <Box sx={{ py: 3 }}>{children}</Box>}
     </div>
   );
 }
@@ -56,7 +53,7 @@ export default function DappApp() {
             <Product />
           </TabPanel>
           <TabPanel value={value} index={1}>
-            Farm Details
+            <Farm />
           </TabPanel>
           <TabPanel value={value} index={2}>
             Product Details
