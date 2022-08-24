@@ -16,7 +16,11 @@ This is a Dapp Supply chain project
 - Data Model Diagram
   ![Activity Diagram](./images/Data%20Model%20Diagram.drawio.png)
 
-## IPFS
+## Contract
+
+- Transaction ID: [0x8d86c815680317ce8a52a15e7fa3088cb8ba4fcd6f824665cfacfd7df6515189](https://rinkeby.etherscan.io/tx/0x8d86c815680317ce8a52a15e7fa3088cb8ba4fcd6f824665cfacfd7df6515189)
+- Contract address: [0x9fe1e9f1a881999D4788a611Af7c1dc6d58dfE28](https://rinkeby.etherscan.io/address/0x9fe1e9f1a881999d4788a611af7c1dc6d58dfe28)
+- App URL: [https://dapp-supplychain.netlify.app/](https://dapp-supplychain.netlify.app/)
 
 ## Libraries used
 

@@ -60,19 +60,19 @@ module.exports = {
     //
     // Useful for deploying to a public network.
     // Note: It's important to wrap the provider as a function to ensure truffle uses a new provider every time.
-    // rinkeby: {
-    //   provider: () =>
-    //     new HDWalletProvider({
-    //       privateKeys: [privateKey],
-    //       providerOrUrl: `https://rinkeby.infura.io/v3/${infuraProjectId}`,
-    //     }),
-    //   network_id: 4,
-    //   chain_id: 4,
-    //   gas: 5500000, // Gas limit used for deploys.
-    //   confirmations: 2, // # of confirmations to wait between deployments. (default: 0)
-    //   timeoutBlocks: 200, // # of blocks before a deployment times out  (minimum/default: 50)
-    //   skipDryRun: true, // Skip dry run before migrations? (default: false for public nets)
-    // },
+    rinkeby: {
+      provider: () =>
+        new HDWalletProvider({
+          privateKeys: [privateKey],
+          providerOrUrl: `https://rinkeby.infura.io/v3/${infuraProjectId}`,
+        }),
+      network_id: 4,
+      chain_id: 4,
+      gas: 5500000, // Gas limit used for deploys.
+      confirmations: 2, // # of confirmations to wait between deployments. (default: 0)
+      timeoutBlocks: 200, // # of blocks before a deployment times out  (minimum/default: 50)
+      skipDryRun: true, // Skip dry run before migrations? (default: false for public nets)
+    },
     //
     // Useful for private networks
     // private: {
