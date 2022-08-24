@@ -18,9 +18,9 @@ This is a Dapp Supply chain project
 
 ## Contract
 
-- Transaction ID: [0x8d86c815680317ce8a52a15e7fa3088cb8ba4fcd6f824665cfacfd7df6515189](https://rinkeby.etherscan.io/tx/0x8d86c815680317ce8a52a15e7fa3088cb8ba4fcd6f824665cfacfd7df6515189)
-- Contract address: [0x9fe1e9f1a881999D4788a611Af7c1dc6d58dfE28](https://rinkeby.etherscan.io/address/0x9fe1e9f1a881999d4788a611af7c1dc6d58dfe28)
-- App URL: [https://dapp-supplychain.netlify.app/](https://dapp-supplychain.netlify.app/)
+- Transaction ID: [0x8d86c815680317ce8a52a15e7fa3088cb8ba4fcd6f824665cfacfd7df6515189](https://rinkeby.etherscan.io/tx/0x8d86c815680317ce8a52a15e7fa3088cb8ba4fcd6f824665cfacfd7df6515189){:target="\_blank" rel="noopener"}
+- Contract address: [0x9fe1e9f1a881999D4788a611Af7c1dc6d58dfE28](https://rinkeby.etherscan.io/address/0x9fe1e9f1a881999d4788a611af7c1dc6d58dfe28){:target="\_blank" rel="noopener"}
+- App URL: [https://dapp-supplychain.netlify.app/](https://dapp-supplychain.netlify.app/){:target="\_blank" rel="noopener"}
 
 ## Libraries used
 
