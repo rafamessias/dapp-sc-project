@@ -12,69 +12,16 @@ import ReturnMsg from "./utils/ReturnMsg";
 
 const fields = [
   {
-    title: "UPC",
-    name: "_upc",
-    type: "number",
-  },
-  {
-    title: "Farmer ID",
-    name: "_originFarmerID",
+    title: "Account",
+    name: "account",
     type: "text",
-  },
-  {
-    title: "Farm Name",
-    name: "_originFarmName",
-    type: "text",
-  },
-  {
-    title: "Farm Info",
-    name: "_originFarmInformation",
-    type: "text",
-  },
-  {
-    title: "Farm Latitude",
-    name: "_originFarmLatitude",
-    type: "number",
-  },
-  {
-    title: "Farm Longitude",
-    name: "_originFarmLongitude",
-    type: "number",
-  },
-  {
-    title: "Product Notes",
-    name: "_productNotes",
-    type: "text",
-  },
-  {
-    title: "Product Price",
-    name: "_productPrice",
-    type: "number",
   },
 ];
 
-export default function Farm() {
+export default function Config() {
   const contractFields = {
-    _upc: 0,
-    _originFarmerID: "",
-    _originFarmName: "",
-    _originFarmInformation: "",
-    _originFarmLatitude: 0,
-    _originFarmLongitude: 0,
-    _productNotes: "",
-    _productPrice: 0,
+    account: "",
   };
-
-  //   const contractFields = {
-  //     _upc: 1,
-  //     _originFarmerID: "0x5f4F160ae4Fb97a3A1d2EebA75427E063EEA9e64",
-  //     _originFarmName: "Rafael Da Silva",
-  //     _originFarmInformation: "Santo Andre",
-  //     _originFarmLatitude: 21.3333,
-  //     _originFarmLongitude: -123.43234,
-  //     _productNotes: "Farm top!",
-  //     _productPrice: 0,
-  //   };
 
   const [formFields, setFormFields] = useState(contractFields);
   const [trxResult, setTrxResult] = useState("");
@@ -98,16 +45,7 @@ export default function Farm() {
     setTrxError("");
   };
 
-  //   uint256 _upc,
-  //   address _ownerID,
-  //   address _originFarmerID,
-  //   string memory _originFarmName,
-  //   string memory _originFarmInformation,
-  //   string memory _originFarmLatitude,
-  //   string memory _originFarmLongitude,
-  //   string memory _productNotes
-
-  const harvest = async (formFields) => {
+  const addFarmerRole = async (formFields) => {
     //if wallet not connected, go and request the connection
     if (!contract) {
       connectWallet();
@@ -116,16 +54,7 @@ export default function Farm() {
     resetMSG();
     try {
       const transaction = await contract.methods
-        .harvestItem(
-          formFields._upc,
-          account.toString(),
-          formFields._originFarmerID,
-          formFields._originFarmName,
-          formFields._originFarmInformation,
-          formFields._originFarmLatitude,
-          formFields._originFarmLongitude,
-          formFields._productNotes
-        )
+        .addFarmer(formFields.account)
         .send({ from: account });
 
       setTrxResult(transaction);
@@ -134,7 +63,7 @@ export default function Farm() {
     }
   };
 
-  const processMethod = async (formFields) => {
+  const addDistributorRole = async (formFields) => {
     //if wallet not connected, go and request the connection
     if (!contract) {
       connectWallet();
@@ -143,7 +72,7 @@ export default function Farm() {
     resetMSG();
     try {
       const transaction = await contract.methods
-        .processItem(formFields._upc)
+        .addDistributor(formFields.account)
         .send({ from: account });
 
       setTrxResult(transaction);
@@ -152,7 +81,7 @@ export default function Farm() {
     }
   };
 
-  const pack = async () => {
+  const addRetailerRole = async (formFields) => {
     //if wallet not connected, go and request the connection
     if (!contract) {
       connectWallet();
@@ -161,7 +90,7 @@ export default function Farm() {
     resetMSG();
     try {
       const transaction = await contract.methods
-        .packItem(formFields._upc)
+        .addRetailer(formFields.account)
         .send({ from: account });
 
       setTrxResult(transaction);
@@ -170,7 +99,7 @@ export default function Farm() {
     }
   };
 
-  const forSale = async () => {
+  const addConsumerRole = async (formFields) => {
     //if wallet not connected, go and request the connection
     if (!contract) {
       connectWallet();
@@ -179,7 +108,7 @@ export default function Farm() {
     resetMSG();
     try {
       const transaction = await contract.methods
-        .sellItem(formFields._upc, formFields._productPrice)
+        .addConsumer(formFields.account)
         .send({ from: account });
 
       setTrxResult(transaction);
@@ -190,20 +119,20 @@ export default function Farm() {
 
   const methods = [
     {
-      title: "Harvest",
-      func: harvest,
+      title: "Add Farmer",
+      func: addFarmerRole,
     },
     {
-      title: "Process",
-      func: processMethod,
+      title: "Add Distributor",
+      func: addDistributorRole,
     },
     {
-      title: "Pack",
-      func: pack,
+      title: "Add Retailer",
+      func: addRetailerRole,
     },
     {
-      title: "ForSale",
-      func: forSale,
+      title: "Add Consumer",
+      func: addConsumerRole,
     },
   ];
 
@@ -211,7 +140,7 @@ export default function Farm() {
     <Card>
       <CardContent>
         <Typography variant="h5" sx={{ color: "white" }}>
-          Product Details
+          Adding Address Roles
         </Typography>
         <Grid container spacing={4} sx={{ mt: 1 }}>
           <Grid item xs={12}>

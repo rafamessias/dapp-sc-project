@@ -1,5 +1,6 @@
 import { Box, Tab, Tabs } from "@mui/material";
 import { useState } from "react";
+import Config from "./Config";
 import Farm from "./Farm";
 import History from "./History";
 import Product from "./Product";
@@ -44,11 +45,12 @@ export default function DappApp() {
       <Box sx={{ width: { xs: "340px", sm: "480px" } }}>
         <Box>
           <Box>
-            <Tabs value={value} onChange={handleChange} centered>
+            <Tabs value={value} onChange={handleChange} variant="scrollable">
               <Tab label="Product" {...a11yProps(0)} />
               <Tab label="Farm" {...a11yProps(1)} />
               <Tab label="Transactions" {...a11yProps(2)} />
               <Tab label="History" {...a11yProps(3)} />
+              <Tab label="Config" {...a11yProps(4)} />
             </Tabs>
           </Box>
           <TabPanel value={value} index={0}>
@@ -62,6 +64,9 @@ export default function DappApp() {
           </TabPanel>
           <TabPanel value={value} index={3}>
             <History />
+          </TabPanel>
+          <TabPanel value={value} index={4}>
+            <Config />
           </TabPanel>
         </Box>
       </Box>

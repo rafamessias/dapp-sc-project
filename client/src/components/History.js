@@ -18,6 +18,9 @@ const fields = [
   },
 ];
 
+const contractEvents =
+  "Harvested,Processed,Packed,ForSale,Sold,Shipped,Received,Purchased";
+
 export default function History() {
   const contractFields = {
     _upc: 0,
@@ -54,9 +57,16 @@ export default function History() {
       const transaction = await contract.getPastEvents("allEvents", {
         filter: { upc: formFields._upc },
         fromBlock: 0,
+        toBlock: "latest",
       });
 
-      setTrxResult(transaction);
+      const onlyEvents = transaction
+        .filter((event) =>
+          contractEvents.includes(event?.event) ? event : null
+        )
+        .map((event) => ({ event: event?.event, address: event?.address }));
+
+      setTrxResult(onlyEvents);
     } catch (error) {
       setTrxError(error.message);
     }
