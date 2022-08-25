@@ -1,10 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.15;
 
-import "../coffeeBase/SupplyChain.sol";
-
 /// Provides basic authorization control
-contract Ownable is SupplyChain {
+contract Ownable {
     address public origOwner;
 
     // Define an Event
@@ -17,7 +15,7 @@ contract Ownable is SupplyChain {
     }
 
     /// Define a function modifier 'onlyOwner'
-    modifier onlyOwner() override {
+    modifier onlyOwner() virtual {
         require(isOwner(), "Is owner account");
         _;
     }

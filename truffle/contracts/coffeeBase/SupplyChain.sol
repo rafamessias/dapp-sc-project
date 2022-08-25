@@ -5,13 +5,15 @@ import "../coffeeAccessControl/ConsumerRole.sol";
 import "../coffeeAccessControl/DistributorRole.sol";
 import "../coffeeAccessControl/FarmerRole.sol";
 import "../coffeeAccessControl/RetailerRole.sol";
+import "../coffeeCore/Ownable.sol";
 
 // Define a contract 'Supplychain'
 contract SupplyChain is
     ConsumerRole,
     DistributorRole,
     FarmerRole,
-    RetailerRole
+    RetailerRole,
+    Ownable
 {
     // Define 'owner'
     address owner;
@@ -73,7 +75,7 @@ contract SupplyChain is
     event Purchased(uint256 indexed upc);
 
     // Define a modifer that checks to see if msg.sender == owner of the contract
-    modifier onlyOwner() virtual {
+    modifier onlyOwner() override {
         require(msg.sender == owner, "Only owner");
         _;
     }
